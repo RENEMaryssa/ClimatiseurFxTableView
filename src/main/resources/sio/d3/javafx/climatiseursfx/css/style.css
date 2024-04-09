@@ -1,0 +1,16 @@
+.fond{
+    -fx-background-color:lightcyan;
+}
+
+.turquoise-zone {
+    -fx-background-color: #F3FDE1;
+}
+
+.magnolia-zone {
+    -fx-background-color: #F6E1FD;
+}
+
+.chablis-zone {
+    -fx-background-color: #FDE4E2;
+    /*-fx-alignment: center;*/
+}
