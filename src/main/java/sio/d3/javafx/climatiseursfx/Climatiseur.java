@@ -1,12 +1,14 @@
 package sio.d3.javafx.climatiseursfx;
 
 public class Climatiseur {
+    private int id;
     private String marque;
     private String modele;
     private int puissance;
     private int smin;
     private int smax;
-    public Climatiseur(String marque, int puissance, String modele) {
+    public Climatiseur(String marque, int puissance, String modele, int id) {
+        this.id = id;
         this.marque = marque;
         this.modele = modele;
         this.puissance = puissance;
@@ -81,6 +83,14 @@ public class Climatiseur {
 
     public String getModele() {
         return modele;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setModele(String modele) {
