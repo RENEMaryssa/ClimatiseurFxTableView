@@ -20,7 +20,8 @@ public class AjoutClimatiseurController{
     @FXML
     private Label marque;
 
-
+    @FXML
+    private TextArea valId;
 
     @FXML
     private TextArea valMarque;
@@ -45,11 +46,14 @@ public class AjoutClimatiseurController{
         String modele = valModele.getText();
         int puissance = Integer.parseInt(valPuissance.getText());
         String marque = valMarque.getText();
+        int smin = Integer.parseInt(valSurfaceMin.getText());
+        int smax = Integer.parseInt(valSurfaceMax.getText());
+        int id = Integer.parseInt(valId.getText());
 
         System.out.println("Enregistrement du climatiseur .... ");
 
         //création d'un nouvel objet
-        Climatiseur c = new Climatiseur(marque,puissance,modele);
+        Climatiseur c = new Climatiseur(marque,puissance,modele,smin,smax,id);
 
         //ajout du climatiseur dans la liste du climatiseur du modèle
         AccueilTableViewController.getClimatiseurs().add(c);
@@ -81,8 +85,8 @@ public class AjoutClimatiseurController{
     private List<Climatiseur> climatiseurs = new ArrayList<>();
 
     //méthode AjoutClimatiseur qui permet d'ajouter un nouveau climatiseur
-    public void AjoutClimatiseur(String marque, int puissance, String modele, int id) {
-        climatiseurs.add(new Climatiseur(marque, puissance, modele));
+    public void AjoutClimatiseur(String marque, int puissance, String modele, int id, int smin, int smax) {
+        climatiseurs.add(new Climatiseur(marque,puissance,modele,smin,smax,id));
     }
 
     //méthode climatiseursToString qui retourne la liste des climatiseurs

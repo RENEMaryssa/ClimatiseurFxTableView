@@ -7,11 +7,15 @@ public class Climatiseur {
     private int puissance;
     private int smin;
     private int smax;
-    public Climatiseur(String marque, int puissance, String modele) {
+    public Climatiseur(String marque, int puissance, String modele, int smin, int smax, int id) {
 
         this.marque = marque;
         this.modele = modele;
         this.puissance = puissance;
+        this.smin = smin;
+        this.smax = smax;
+        this.id = id;
+
 
         if(this.puissance == 7000){
             this.smin=7;
