@@ -7,8 +7,8 @@ public class Climatiseur {
     private int puissance;
     private int smin;
     private int smax;
-    public Climatiseur(String marque, int puissance, String modele, int id) {
-        this.id = id;
+    public Climatiseur(String marque, int puissance, String modele) {
+
         this.marque = marque;
         this.modele = modele;
         this.puissance = puissance;
@@ -48,7 +48,7 @@ public class Climatiseur {
             this.smax=80;
         }
     }
-    
+
     public String getMarque() {
         return marque;
     }
