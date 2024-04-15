@@ -79,6 +79,7 @@ public class AjoutClimatiseurController{
     public void initialize(URL url, ResourceBundle resourceBundl)
     {
         marque.setText("Saisir la marque : ");
+
     }
 
     //ajouter une collection (liste) de type List . La collection permet de stocker des éléments de type Climatiseur

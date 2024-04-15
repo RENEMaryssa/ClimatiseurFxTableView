@@ -20,7 +20,7 @@ public class AccueilTableViewController implements Initializable {
 
     //ajouter un attribut de type liste observable d'objets de type climatiseur. Cet attribut privé s'appelle : climatiseurs.
     // Ecrire l'accesseur correspondant. L'attribut et la méthode sont statiques (static).
-    private static ObservableList climatiseurs  =  FXCollections.observableArrayList();
+    public static ObservableList climatiseurs  =  FXCollections.observableArrayList();
     public static ObservableList getClimatiseurs() {
         return climatiseurs;
     }
@@ -55,6 +55,10 @@ public class AccueilTableViewController implements Initializable {
     {
         System.out.println("Initialisation de l'écran");
         Model.connect_to_database();
+
+        //récupération des données de la base
+        climatiseurs.addAll(Model.selectClimatiseurs());
+
         //association du tableView avec la liste observable tout élément ajouter dans la
         //liste observable sera automatiquement ajouté au tableView tout élément
         //supprimer de la liste observable sera automatiquement supprimé du tableView
