@@ -56,20 +56,22 @@ public class AccueilTableViewController implements Initializable {
         System.out.println("Initialisation de l'écran");
         Model.connect_to_database();
 
-        //récupération des données de la base
+        // Effacer la liste des climatiseurs avant de la remplir à nouveau
+        climatiseurs.clear();
+
+        // Récupération des données de la base
         climatiseurs.addAll(Model.selectClimatiseurs());
 
-        //association du tableView avec la liste observable tout élément ajouter dans la
-        //liste observable sera automatiquement ajouté au tableView tout élément
-        //supprimer de la liste observable sera automatiquement supprimé du tableView
+        // Rafraîchir le contenu du TableView
+        tableViewClims.setItems(null);
+        tableViewClims.layout();
         tableViewClims.setItems(climatiseurs);
 
-        ///lors d'un double clic sur un item (ligne) du tableView, on
-        //récupère le climatiseur sélectionne et on le supprime du modèle
+        // Lors d'un double clic sur un item (ligne) du tableView, on
+        // récupère le climatiseur sélectionné et on le supprime du modèle
         tableViewClims.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                // Le code de la méthode handle
                 if (event.getClickCount() > 1) {
                     // Récupération du climatiseur sélectionné
                     Climatiseur selectedItem = (Climatiseur) tableViewClims.getSelectionModel().getSelectedItem();

@@ -1,6 +1,5 @@
 package sio.d3.javafx.climatiseursfx;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -15,6 +14,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+
 
 public class AjoutClimatiseurController{
     @FXML
@@ -46,18 +46,18 @@ public class AjoutClimatiseurController{
         String modele = valModele.getText();
         int puissance = Integer.parseInt(valPuissance.getText());
         String marque = valMarque.getText();
-        int smin = Integer.parseInt(valSurfaceMin.getText());
-        int smax = Integer.parseInt(valSurfaceMax.getText());
-        int id = Integer.parseInt(valId.getText());
+
 
         System.out.println("Enregistrement du climatiseur .... ");
 
         //création d'un nouvel objet
-        Climatiseur c = new Climatiseur(marque,puissance,modele,smin,smax,id);
+        Climatiseur c = new Climatiseur(marque,puissance,modele);
 
         //ajout du climatiseur dans la liste du climatiseur du modèle
         AccueilTableViewController.getClimatiseurs().add(c);
 
+        // ajouter le climatiseur à la base de données
+        Model.insertClimatiseur(c);
 
         Stage stage = (Stage) valModele.getScene().getWindow();
 
@@ -87,7 +87,7 @@ public class AjoutClimatiseurController{
 
     //méthode AjoutClimatiseur qui permet d'ajouter un nouveau climatiseur
     public void AjoutClimatiseur(String marque, int puissance, String modele, int id, int smin, int smax) {
-        climatiseurs.add(new Climatiseur(marque,puissance,modele,smin,smax,id));
+        climatiseurs.add(new Climatiseur(marque,puissance,modele));
     }
 
     //méthode climatiseursToString qui retourne la liste des climatiseurs

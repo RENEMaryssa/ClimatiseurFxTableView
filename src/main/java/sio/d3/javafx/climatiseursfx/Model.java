@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Model
 {
+    private static PreparedStatement pstmt;
     private static Connection connexion;
     private static Statement stmt;
     private static List<Climatiseur> climatiseurs;
@@ -37,6 +38,7 @@ public class Model
     }
 
     public static List<Climatiseur> selectClimatiseurs() {
+        // Initialiser la liste des climatiseurs si elle est nulle, ou l'effacer si elle ne l'est pas.
         if (climatiseurs == null) {
             climatiseurs = new ArrayList<>();
         } else {
@@ -51,8 +53,13 @@ public class Model
             // définition de la requête
             String sql = "SELECT * from climatiseurs";
             System.out.println("requête :" + sql);
-            // exécution de la requête
-            ResultSet rs = stmt.executeQuery(sql);
+
+            // Exécution de la requête
+            pstmt = connexion.prepareStatement(sql);
+            pstmt.execute();
+
+            // Récupération des résultats
+            ResultSet rs = pstmt.getResultSet();
 
             // parcours des enregistrements résultats,
             // création de nouveaux objets "climatiseurs" et
@@ -65,7 +72,8 @@ public class Model
                 int smi = rs.getInt("surfaceMin");
                 int sma = rs.getInt("surfaceMax");
 
-                Climatiseur c = new Climatiseur(mar, pui, mod, smi, sma, id);
+                // Créer un nouveau climatiseur avec les données de l'ensemble des résultats.
+                Climatiseur c = new Climatiseur(mar, pui, mod);
                 climatiseurs.add(c);
             }
 
@@ -83,8 +91,25 @@ public class Model
                 }
             }
         }
-
+        // Retourne la liste des climatiseurs
         return climatiseurs;
+    }
+
+    public static void insertClimatiseur(Climatiseur climatiseur) {
+        String sql = "INSERT INTO climatiseurs (marque, modele, puissance, surfaceMin, surfaceMax) VALUES (?, ?, ?, ?, ?)";
+
+        try (PreparedStatement pstmt = connexion.prepareStatement(sql)) {
+            pstmt.setString(1, climatiseur.getMarque());
+            pstmt.setString(2, climatiseur.getModele());
+            pstmt.setInt(3, climatiseur.getPuissance());
+            pstmt.setInt(4, climatiseur.getSmin());
+            pstmt.setInt(5, climatiseur.getSmax());
+
+            pstmt.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.err.println("La requête s'est mal déroulée.");
+        }
     }
 
 }
